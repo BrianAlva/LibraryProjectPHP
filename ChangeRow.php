@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Book Record</title>
+    <title>Edit New Item</title>
     <style>
         body {
             font-family: Arial, sans-serif;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Table</title>
+    <title>Edit Items</title>
     <style>
         body {
             font-family: Arial, sans-serif;

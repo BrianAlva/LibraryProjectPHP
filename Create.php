@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create Record</title>
+    <title>Create New Item</title>
     <style>
         body {
             font-family: Arial, sans-serif;
