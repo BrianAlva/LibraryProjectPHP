@@ -80,7 +80,7 @@
     
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td><a href='EditPatronRow.php?item_id=" . $row["patronID"] . "'>" . $row["patronID"] . "</a></td>";
+            echo "<td><a href='EditPatronRow.php?patron_id=" . $row["patronID"] . "'>" . $row["patronID"] . "</a></td>";
             echo "<td>" . $row["patronLastName"] . "</td>";
             echo "<td>" . $row["patronFirstName"] . "</td>";
             echo "<td>" . $row["patronAddress"] . "</td>";
