@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit New Item</title>
+    <title>Edit Patron Row</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,48 +68,39 @@
     </style>
 </head>
 <body>
-    <h2>Edit Item</h2>
+    <h2>Edit Patron Row</h2>
 
     <?php
     // Include the database configuration
     include "db_config.php";
 
     // Check if an item ID is provided in the query string
-    if (isset($_GET["item_id"])) {
-        $item_id = $_GET["item_id"];
+    if (isset($_GET["patron_id"])) {
+        $patron_id = $_GET["patron_id"];
 
         // Fetch the item record with the provided item ID
-        $sql = "SELECT * FROM Item WHERE itemID = $item_id";
+        $sql = "SELECT * FROM Patron WHERE patronID = $patron_id";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             // Display the form for editing the item record
             echo '<form method="post" action="">';
-            echo '<input type="hidden" name="item_id" value="' . $row["itemID"] . '">';
-            echo '<label for="itemISBN">ISBN:</label>';
-            echo '<input type="text" name="itemISBN" value="' . $row["itemISBN"] . '" required maxlength="17"><br><br>';
-            echo '<label for="itemTitle">Title:</label>';
-            echo '<input type="text" name="itemTitle" value="' . $row["itemTitle"] . '" required maxlength="90"><br><br>';
-            echo '<label for="itemType">Type:</label>';
-            echo '<input type="text" name="itemType" value="' . $row["itemType"] . '" required maxlength="15"><br><br>';
-            echo '<label for="itemYearPublished">Year Published:</label>';
-            echo '<input type="number" name="itemYearPublished" value="' . $row["itemYearPublished"] . '" required max="2023"><br><br>';
-            echo '<label for="itemPublisher">Publisher:</label>';
-            echo '<input type="text" name="itemPublisher" value="' . $row["itemPublisher"] . '" required maxlength="45"><br><br>';
-            echo '<label for="itemLoC">Library of Congress:</label>';
-            echo '<input type="text" name="itemLoC" value="' . $row["itemLoC"] . '" required maxlength="16"><br><br>';
-            echo '<label for="itemCost">Cost:</label>';
-            echo '<input type="number" step="0.01" name="itemCost" value="' . $row["itemCost"] . '" required max="99999.99"><br><br>';
-            echo '<label for="itemBranch">Branch:</label>';
-            echo '<input type="text" name="itemBranch" value="' . $row["itemBranch"] . '" required maxlength="16"><br><br>';
-            echo '<label for="itemStatus">Status:</label>';
-            echo '<input type="text" name="itemStatus" value="' . $row["itemStatus"] . '" required maxlength="16"><br><br>';
-            echo '<label for="itemSecurityDeviceFlag">Security Device Flag:</label>';
-            echo '<input type="text" name="itemSecurityDeviceFlag" value="' . $row["itemSecurityDeviceFlag"] . '" maxlength="16"><br><br>';
-            echo '<label for="itemDamage">Damage:</label>';
-            echo '<input type="text" name="itemDamage" value="' . $row["itemDamage"] . '" required maxlength="16"><br><br>';
-            echo '<input type="submit" value="Save Changes">';
+            echo '<input type="hidden" name="patron_id" value="' . $row["patronID"] . '">';
+            echo '<label for="patronLastName">Last Name:</label>';
+            echo '<input type="text" name="patronLastName" value="' . $row["patronLastName"] . '" required maxlength="90"><br><br>';
+            echo '<label for="patronFirstName">First Name:</label>';
+            echo '<input type="text" name="patronFirstName" value="' . $row["patronFirstName"] . '" required maxlength="90"><br><br>';
+            echo '<label for="patronAddress">Address:</label>';
+            echo '<input type="text" name="patronAddress" value="' . $row["patronAddress"] . '" required maxlength="90"><br><br>';
+            echo '<label for="patronDateOfBirth">Date Of Birth (YYYY-MM-DD):</label>';
+            echo '<input type="text" name="patronDateOfBirth" value="' . $row["patronDateOfBirth"] . '" required max="10"><br><br>';
+            echo '<label for="patronLastRenewed">Last Renewed:</label>';
+            echo '<input type="text" name="patronLastRenewed" value="' . $row["patronLastRenewed"] . '" required maxlength="45"><br><br>';
+            echo '<label for="patronContactPhone">Contact Phone:</label>';
+            echo '<input type="text" name="patronContactPhone" value="' . $row["patronContactPhone"] . '" required maxlength="10"><br><br>';
+            echo '<label for="paymentBalance">Payment Balence:</label>';
+            echo '<input type="number" step="0.01" name="paymentBalance" value="' . $row["paymentBalance"] . '" required max="99999.99"><br><br>';
             echo '</form>';
         } else {
             echo "Item record not found.";
@@ -120,24 +111,20 @@
 
     // Handle the form submission to update the record
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $item_id = $_POST["item_id"];
-        $itemISBN = $_POST["itemISBN"];
-        $itemTitle = $_POST["itemTitle"];
-        $itemType = $_POST["itemType"];
-        $itemYearPublished = $_POST["itemYearPublished"];
-        $itemPublisher = $_POST["itemPublisher"];
-        $itemLoC = $_POST["itemLoC"];
-        $itemCost = $_POST["itemCost"];
-        $itemBranch = $_POST["itemBranch"];
-        $itemStatus = $_POST["itemStatus"];
-        $itemSecurityDeviceFlag = $_POST["itemSecurityDeviceFlag"];
-        $itemDamage = $_POST["itemDamage"];
+        $patron_id = $_POST["patron_id"];
+        $patronLastName = $_POST["patronLastName"];
+        $patronFirstName = $_POST["patronFirstName"];
+        $patronAddress = $_POST["patronAddress"];
+        $patronDateOfBirth = $_POST["patronDateOfBirth"];
+        $patronLastRenewed = $_POST["patronLastRenewed"];
+        $patronContactPhone = $_POST["patronContactPhone"];
+        $paymentBalance = $_POST["paymentBalance"];
 
         // SQL query to update the item record
-        $sql = "UPDATE Item SET itemISBN='$itemISBN', itemTitle='$itemTitle', itemType='$itemType', itemYearPublished=$itemYearPublished, itemPublisher='$itemPublisher', itemLoC='$itemLoC', itemCost=$itemCost, itemBranch='$itemBranch', itemStatus='$itemStatus', itemSecurityDeviceFlag='$itemSecurityDeviceFlag', itemDamage='$itemDamage' WHERE itemID=$item_id";
+        $sql = "UPDATE Patron SET patronLastName='$patronLastName', patronFirstName='$patronFirstName', patronAddress='$patronAddress', patronDateOfBirth=$patronDateOfBirth, patronLastRenewed='$patronLastRenewed', patronContactPhone='$patronContactPhone', paymentBalance=$paymentBalance WHERE patronID=$patron_id";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Record with Item ID $item_id has been updated.";
+            echo "Record with Patron ID $patron_id has been updated.";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
