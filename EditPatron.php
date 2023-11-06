@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Items</title>
+    <title>Edit Patron</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,14 +54,14 @@
     </style>
 </head>
 <body>
-    <h2>Edit Items</h2>
+    <h2>Edit Patron</h2>
 
     <?php
     // Include the database configuration
     include "db_config.php";
 
     // SQL query to retrieve data from the "book" table
-    $sql = "SELECT * FROM Item";
+    $sql = "SELECT * FROM Patron";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -69,37 +69,25 @@
         echo "<table>";
         echo "<tr>
                 <th>ID</th>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Year Published</th>
-                <th>Publisher</th>
-                <th>Library of Congress</th>
-                <th>Cost</th>
-                <th>Aquisition Date</th>
-                <th>Copy</th>
-                <th>Branch</th>
-                <th>Status</th>
-                <th>Security Device Flag</th>
-                <th>Damage</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Address</th>
+                <th>Date Of Birth</th>
+                <th>Last Renewed</th>
+                <th>Contact Phone</th>
+                <th>Payment Balence</th>
             </tr>";
     
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td><a href='ChangeRow.php?item_id=" . $row["itemID"] . "'>" . $row["itemID"] . "</a></td>";
-            echo "<td>" . $row["itemISBN"] . "</td>";
-            echo "<td>" . $row["itemTitle"] . "</td>";
-            echo "<td>" . $row["itemType"] . "</td>";
-            echo "<td>" . $row["itemYearPublished"] . "</td>";
-            echo "<td>" . $row["itemPublisher"] . "</td>";
-            echo "<td>" . $row["itemLoC"] . "</td>";
-            echo "<td>" . $row["itemCost"] . "</td>";
-            echo "<td>" . $row["itemAquisitionDate"] . "</td>";
-            echo "<td>" . $row["itemCopy"] . "</td>";
-            echo "<td>" . $row["itemBranch"] . "</td>";
-            echo "<td>" . $row["itemStatus"] . "</td>";
-            echo "<td>" . $row["itemSecurityDeviceFlag"] . "</td>";
-            echo "<td>" . $row["itemDamage"] . "</td>";
+            echo "<td><a href='EditPatronRow.php?item_id=" . $row["patronID"] . "'>" . $row["patronID"] . "</a></td>";
+            echo "<td>" . $row["patronLastName"] . "</td>";
+            echo "<td>" . $row["patronFirstName"] . "</td>";
+            echo "<td>" . $row["patronAddress"] . "</td>";
+            echo "<td>" . $row["patronDateOfBirth"] . "</td>";
+            echo "<td>" . $row["patronLastRenewed"] . "</td>";
+            echo "<td>" . $row["patronContactPhone"] . "</td>";
+            echo "<td>" . $row["paymentBalance"] . "</td>";
             echo "</tr>";
         }
     
