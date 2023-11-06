@@ -12,7 +12,7 @@ CREATE TABLE Patron (
 	patronAddress VARCHAR(90) NOT NULL,
 	patronDateOfBirth DATE NOT NULL,
 	patronLastRenewed DATE NOT NULL DEFAULT (CURRENT_DATE),
-	patronContactPhone VARCHAR(15) NOT NULL,
+	patronContactPhone CHAR(10) NOT NULL,
 	paymentBalance DECIMAL(13,2) NOT NULL DEFAULT 0.00,
 	PRIMARY KEY (patronID)
 );
