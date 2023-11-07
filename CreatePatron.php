@@ -82,20 +82,29 @@
         $patronDateOfBirth = $_POST["patronDateOfBirth"];
         $patronContactPhone = $_POST["patronContactPhone"];
 
-
-        // SQL query to insert a new record into the "Item" table
-        $sql = "INSERT INTO Item (patronLastName, patronFirstName, patronAddress, patronDateOfBirth, patronContactPhone)
-                VALUES ('$patronLastName', '$patronFirstName', '$patronAddress', $patronDateOfBirth, '$patronContactPhone')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "<p>Record added successfully.</p>";
+        // Input validation
+        if (strtotime($patronDateOfBirth) === false) {
+            echo "<p>Error: Date Of Birth should be in YYYY-MM-DD format.</p>";
+        } elseif (!is_numeric($patronContactPhone)) {
+            echo "<p>Error: Contact Phone should contain only numbers.</p>";
         } else {
-            echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+            // Valid input, proceed with inserting data into the database
+
+            // SQL query to insert a new record into the "Patron" table
+            $sql = "INSERT INTO Patron (patronLastName, patronFirstName, patronAddress, patronDateOfBirth, patronContactPhone)
+                    VALUES ('$patronLastName', '$patronFirstName', '$patronAddress', '$patronDateOfBirth', '$patronContactPhone')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "<p>Record added successfully.</p>";
+            } else {
+                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+            }
         }
 
         // Close the database connection
         $conn->close();
     }
+
     ?>
 
     <form method="post" action="">
@@ -110,7 +119,7 @@
         <input type="text" name="patronAddress" required maxlength="90">
 
         <label for="patronDateOfBirth">Date Of Birth (YYYY-MM-DD):</label>
-        <input type="text" name="patronDateOfBirth" required max="10">
+        <input type="text" name="patronDateOfBirth" required maxlength="10">
 
         <label for="patronContactPhone">Contact Phone:</label>
         <input type="text" name="patronContactPhone" required maxlength="10">
