@@ -68,24 +68,24 @@
     </style>
 </head>
 <body>
-    <h2>Delete Record</h2>
+    <h2>Delete item</h2>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include the database configuration
         include "db_config.php";
 
-        // Retrieve the book ID to be deleted
-        $book_id = $_POST["book_id"];
+        // Retrieve the item ID to be deleted
+        $itemID = $_POST["itemID"];
 
-        // SQL query to delete the record from the "book" table
-        $sql = "DELETE FROM book WHERE book_id = $book_id";
+        // SQL query to delete the record from the "Item" table
+        $sql = "DELETE FROM Item WHERE itemID = '$itemID'";
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->affected_rows > 0) {
-                echo "<p>Record with Book ID $book_id has been deleted.</p>";
+                echo "<p>Record with Item ID $itemID has been deleted.</p>";
             } else {
-                echo "<p>No record found with Book ID $book_id.</p>";
+                echo "<p>No record found with Item ID $itemID.</p>";
             }
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
@@ -97,8 +97,8 @@
     ?>
 
     <form method="post" action="">
-        <label for="book_id">Book ID:</label>
-        <input type="number" name="book_id" required>
+        <label for="itemID">Item ID:</label>
+        <input type="number" name="itemID" required>
 
         <input type="submit" value="Delete Record">
     </form>

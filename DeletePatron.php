@@ -76,16 +76,16 @@
         include "db_config.php";
 
         // Retrieve the Patron ID to be deleted
-        $patron_id = $_POST["patron_id"];
+        $patronID = $_POST["patronID"];
 
         // SQL query to delete the record from the "Patron" table
-        $sql = "DELETE FROM Patron WHERE patron_id = $patron_id";
+        $sql = "DELETE FROM Patron WHERE patronID = $patronID";
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->affected_rows > 0) {
-                echo "<p>Record with Patron ID $patron_id has been deleted.</p>";
+                echo "<p>Record with Patron ID $patronID has been deleted.</p>";
             } else {
-                echo "<p>No record found with Patron ID $patron_id.</p>";
+                echo "<p>No record found with Patron ID $patronID.</p>";
             }
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
@@ -97,8 +97,8 @@
     ?>
 
     <form method="post" action="">
-        <label for="patron_id">Patron ID:</label>
-        <input type="number" name="patron_id" required>
+        <label for="patronID">Patron ID:</label>
+        <input type="number" name="patronID" required>
 
         <input type="submit" value="Delete Patron Record">
     </form>
