@@ -94,13 +94,14 @@
             echo '<label for="patronAddress">Address:</label>';
             echo '<input type="text" name="patronAddress" value="' . $row["patronAddress"] . '" required maxlength="90"><br><br>';
             echo '<label for="patronDateOfBirth">Date Of Birth (YYYY-MM-DD):</label>';
-            echo '<input type="text" name="patronDateOfBirth" value="' . $row["patronDateOfBirth"] . '" required max="10"><br><br>';
+            echo '<input type="text" name="patronDateOfBirth" value="' . $row["patronDateOfBirth"] . '" required maxlength="10"><br><br>';
             echo '<label for="patronLastRenewed">Last Renewed:</label>';
-            echo '<input type="text" name="patronLastRenewed" value="' . $row["patronLastRenewed"] . '" required maxlength="45"><br><br>';
+            echo '<input type="text" name="patronLastRenewed" value="' . $row["patronLastRenewed"] . '" required maxlength="10"><br><br>';
             echo '<label for="patronContactPhone">Contact Phone:</label>';
             echo '<input type="text" name="patronContactPhone" value="' . $row["patronContactPhone"] . '" required maxlength="10"><br><br>';
             echo '<label for="paymentBalance">Payment Balence:</label>';
             echo '<input type="number" step="0.01" name="paymentBalance" value="' . $row["paymentBalance"] . '" required max="99999.99"><br><br>';
+            echo '<input type="submit" value="Save Changes">';
             echo '</form>';
         } else {
             echo "Item record not found.";
@@ -120,18 +121,27 @@
         $patronContactPhone = $_POST["patronContactPhone"];
         $paymentBalance = $_POST["paymentBalance"];
 
-        // SQL query to update the item record
-        $sql = "UPDATE Patron SET patronLastName='$patronLastName', patronFirstName='$patronFirstName', patronAddress='$patronAddress', patronDateOfBirth=$patronDateOfBirth, patronLastRenewed='$patronLastRenewed', patronContactPhone='$patronContactPhone', paymentBalance=$paymentBalance WHERE patronID=$patron_id";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "Record with Patron ID $patron_id has been updated.";
+        // Input validation
+        if (strtotime($patronDateOfBirth) === false) {
+            echo "<p>Error: Date Of Birth should be in YYYY-MM-DD format.</p>";
+        } elseif (!is_numeric($patronContactPhone)) {
+            echo "<p>Error: Contact Phone should contain only numbers.</p>";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    }
 
-    // Close the database connection
-    $conn->close();
+            // SQL query to update the item record
+            $sql = "UPDATE Patron SET patronLastName='$patronLastName', patronFirstName='$patronFirstName', patronAddress='$patronAddress', patronDateOfBirth='$patronDateOfBirth', patronLastRenewed='$patronLastRenewed', patronContactPhone='$patronContactPhone', paymentBalance=$paymentBalance WHERE patronID=$patron_id";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "Record with Patron ID $patron_id has been updated.";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
+
+        // Close the database connection
+        $conn->close();
+
+    }
     ?>
 
     <a href="welcome.php">Back to Welcome</a>
