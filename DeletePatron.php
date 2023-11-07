@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Record</title>
+    <title>Delete Patron Record</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,24 +68,24 @@
     </style>
 </head>
 <body>
-    <h2>Delete item</h2>
+    <h2>Delete Patron Record</h2>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include the database configuration
         include "db_config.php";
 
-        // Retrieve the item ID to be deleted
-        $itemID = $_POST["itemID"];
+        // Retrieve the Patron ID to be deleted
+        $patronID = $_POST["patronID"];
 
-        // SQL query to delete the record from the "Item" table
-        $sql = "DELETE FROM Item WHERE itemID = '$itemID'";
+        // SQL query to delete the record from the "Patron" table
+        $sql = "DELETE FROM Patron WHERE patronID = $patronID";
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->affected_rows > 0) {
-                echo "<p>Record with Item ID $itemID has been deleted.</p>";
+                echo "<p>Record with Patron ID $patronID has been deleted.</p>";
             } else {
-                echo "<p>No record found with Item ID $itemID.</p>";
+                echo "<p>No record found with Patron ID $patronID.</p>";
             }
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
@@ -97,13 +97,12 @@
     ?>
 
     <form method="post" action="">
-        <label for="itemID">Item ID:</label>
-        <input type="number" name="itemID" required>
+        <label for="patronID">Patron ID:</label>
+        <input type="number" name="patronID" required>
 
-        <input type="submit" value="Delete Record">
+        <input type="submit" value="Delete Patron Record">
     </form>
 
     <a href="welcome.php">Back to Welcome</a>
 </body>
 </html>
-

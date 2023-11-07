@@ -39,6 +39,10 @@
     <a href="Create.php">Create New Item</a>
     <a href="Delete.php">Delete Item</a>
     <a href="Change.php">Edit Item</a>
+    <a href="CreatePatron.php">Create New Patron</a>
+    <a href="EditPatron.php">Edit Patron</a>
+    <a href="DeletePatron.php">Delete Patron</a>
+    
 
     <br><br>
 
