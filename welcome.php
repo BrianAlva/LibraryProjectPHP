@@ -35,6 +35,7 @@
     <p>You have successfully logged in.</p>
 
     <!-- Buttons to navigate to different pages -->
+    <a href="CheckInScan.php">Check-In Item</a>
     <a href="SeeTable.php">View Table</a>
     <a href="Create.php">Create New Item</a>
     <a href="Delete.php">Delete Item</a>
