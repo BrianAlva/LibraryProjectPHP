@@ -81,14 +81,14 @@
         // SQL query to check-in scanned item to update the "Item" table
         $sql = "UPDATE Item 
                 SET itemStatus = 'Checked-In'
-                WHERE itemID = $itemID"
+                WHERE itemID = $itemID";
     
         if ($conn->query($sql) === TRUE) {
-            echo "<p>Item successfully checked-in.</p>";
+            echo "<p>Record added successfully.</p>";
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
         }
-          
+
         // Close the database connection
         $conn->close();
     }
