@@ -84,7 +84,7 @@
                 WHERE itemID = $itemID";
     
         if ($conn->query($sql) === TRUE) {
-            echo "<p>Record added successfully.</p>";
+            echo "<p>Item successfully checked-in.</p>";
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
         }
