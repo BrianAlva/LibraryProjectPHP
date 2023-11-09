@@ -68,7 +68,7 @@
     </style>
 </head>
 <body>
-    <h2>Check Out</h2>
+    <h2>Start New Check Out Transaction</h2>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -82,13 +82,52 @@
         $result = $conn->query($checkIDQuery);
 
         if ($result->num_rows > 0) {
-            // patronID exists, proceed with the insert
-            $sql = "INSERT INTO checkoutTransaction (patronID) VALUES ('$patronID')";
-            
-            if ($conn->query($sql) === TRUE) {
-                echo "<p>Record added successfully.</p>";
+            // patronID exists, proceed to check payment balance and book count
+            $balanceQuery = "SELECT paymentBalance FROM Patron WHERE patronID = '$patronID'";
+            $balanceResult = $conn->query($balanceQuery);
+
+            if ($balanceResult->num_rows > 0) {
+                $row = $balanceResult->fetch_assoc();
+                $paymentBalance = $row["paymentBalance"];
+
+                // Check payment balance
+                if ($paymentBalance == 0.00) {
+                    // Payment balance is 0.00, check the book count
+                    $bookCountQuery = "SELECT COUNT(*) AS bookCount
+                                       FROM checkoutTransaction ct 
+                                       JOIN checkoutTransactionItem cti ON ct.transactionID = cti.transactionID
+                                       WHERE ct.patronID = '$patronID'";
+                    $bookCountResult = $conn->query($bookCountQuery);
+
+                    if ($bookCountResult->num_rows > 0) {
+                        $bookCountRow = $bookCountResult->fetch_assoc();
+                        $bookCount = $bookCountRow["bookCount"];
+
+                        // Check the book count against the maximum allowed
+                        $maxBooksAllowed = 20;
+
+                        if ($bookCount < $maxBooksAllowed) {
+                            // Proceed with the insert
+                            $insertQuery = "INSERT INTO checkoutTransaction (patronID) VALUES ('$patronID')";
+
+                            if ($conn->query($insertQuery) === TRUE) {
+                                header("Location: CheckOutItems.php");
+                                exit();
+                            } else {
+                                echo "<p>Error inserting record: " . $insertQuery . "<br>" . $conn->error . "</p>";
+                            }
+                        } else {
+                            echo "<p>Error: Maximum number of books allowed reached for this patron.</p>";
+                        }
+                    } else {
+                        echo "<p>Error fetching book count: " . $bookCountQuery . "<br>" . $conn->error . "</p>";
+                    }
+                } else {
+                    // Payment balance is not 0.00, display message
+                    echo "<p>Existing Balance of $paymentBalance needs to be paid.</p>";
+                }
             } else {
-                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+                echo "<p>Error fetching balance: " . $balanceQuery . "<br>" . $conn->error . "</p>";
             }
         } else {
             // patronID doesn't exist, provide an error message
@@ -98,18 +137,16 @@
         // Close the database connection
         $conn->close();
     }
-
     ?>
 
     <form method="post" action="">
-
         <label for="patronID">Patron ID:</label>
         <input type="text" name="patronID" required maxlength="4">
-
         <input type="submit" value="Create Transaction">
-
     </form>
 
     <a href="welcome.php">Back to Welcome</a>
 </body>
 </html>
+
+

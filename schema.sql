@@ -87,6 +87,7 @@ CREATE TABLE checkoutTransactionItem (
 	itemID SMALLINT UNSIGNED NOT NULL,
 	dueDate DATE NOT NULL DEFAULT (DATE_ADD(CURRENT_DATE, INTERVAL 2 WEEK)),
     returnDATE DATE NOT NULL DEFAULT (CURRENT_DATE),
+	PRIMARY KEY (transactionID, itemID),
     CONSTRAINT fk_checkoutTransactionItem_checkoutTransaction FOREIGN KEY (transactionID) REFERENCES checkoutTransaction (transactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
@@ -94,7 +95,5 @@ CREATE TABLE checkoutTransactionItem (
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );
-
-
 
 
