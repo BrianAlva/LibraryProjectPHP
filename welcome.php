@@ -42,6 +42,7 @@
     <a href="CreatePatron.php">Create New Patron</a>
     <a href="EditPatron.php">Edit Patron</a>
     <a href="DeletePatron.php">Delete Patron</a>
+    <a href="NewCheckOut.php">Check Out</a>
     
 
     <br><br>
