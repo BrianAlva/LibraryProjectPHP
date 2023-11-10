@@ -78,8 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $itemID = $_POST["itemID"];
 
-    // Check if ItemID exists
-    $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID'";
+    // Check if ItemID exists and is available
+    $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Available'";
     $itemResult = $conn->query($checkItemQuery);
 
     // Get the most recent transactionID
@@ -90,13 +90,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($transactionIDResult->num_rows > 0) {
         $transactionID = $transactionIDResult->fetch_assoc()['maxTransactionID'];
 
-        // Insert into checkoutTransactionItem
-        $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+        // Check if the item is not already checked out in the current transaction
+        $checkCheckoutQuery = "SELECT * FROM checkoutTransactionItem WHERE transactionID = '$transactionID' AND itemID = '$itemID'";
+        $checkoutResult = $conn->query($checkCheckoutQuery);
 
-        if ($conn->query($sql) === TRUE) {
-            echo "<p>Item $itemID was checked out.</p>";
+        if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
+            // Insert into checkoutTransactionItem
+            $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "<p>Item $itemID checked out to transaction $transactionID.</p>";
+            } else {
+                echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
+            }
         } else {
-            echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
+            echo "<p>Error: Item ID is not available or is already checked out.</p>";
         }
     } else {
         echo "<p>Error: No transactions found.</p>";
@@ -116,3 +124,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <a href="welcome.php">Back to Welcome</a>
 </body>
 </html>
+
