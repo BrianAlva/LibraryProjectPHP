@@ -71,11 +71,14 @@
     <h2>Start New Check Out Transaction</h2>
 
     <?php
+
+    session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include the database configuration
         include "db_config.php";
 
         $patronID = $_POST["patronID"];
+        $_SESSION["patronID"] = $patronID;
 
         // Check if patronID exists
         $checkIDQuery = "SELECT * FROM Patron WHERE patronID = '$patronID'";

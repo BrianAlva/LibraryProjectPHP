@@ -72,54 +72,91 @@
 <h2>Check Out Item</h2>
 
 <?php
+
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Include the database configuration
     include "db_config.php";
 
     $itemID = $_POST["itemID"];
+    $patronID = isset($_SESSION["patronID"]) ? $_SESSION["patronID"] : null;
 
-    // Check if ItemID exists and is available
-    $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Available'";
-    $itemResult = $conn->query($checkItemQuery);
+    // Query to get the count of books in the patron's name
+    $bookCountQuery = "SELECT COUNT(*) AS bookCount
+                       FROM checkoutTransaction ct 
+                       JOIN checkoutTransactionItem cti ON ct.transactionID = cti.transactionID
+                       WHERE ct.patronID = '$patronID'";
+    $bookCountResult = $conn->query($bookCountQuery);
 
-    // Get the most recent transactionID
-    $transactionIDQuery = "SELECT MAX(transactionID) AS maxTransactionID FROM checkoutTransaction";
-    $transactionIDResult = $conn->query($transactionIDQuery);
+    if ($bookCountResult->num_rows > 0) {
+        $bookCountRow = $bookCountResult->fetch_assoc();
+        $bookCount = $bookCountRow["bookCount"];
 
-    // Check if there are transactions
-    if ($transactionIDResult->num_rows > 0) {
-        $transactionID = $transactionIDResult->fetch_assoc()['maxTransactionID'];
+        // Check the book count against the maximum allowed
+        $maxBooksAllowed = 20;
 
-        // Check if the item is not already checked out in the current transaction
-        $checkCheckoutQuery = "SELECT * FROM checkoutTransactionItem WHERE transactionID = '$transactionID' AND itemID = '$itemID'";
-        $checkoutResult = $conn->query($checkCheckoutQuery);
+        if ($bookCount < $maxBooksAllowed) {
+            // Get the first and last name of the patron
+            $patronNameQuery = "SELECT patronFirstName, patronLastName FROM Patron WHERE patronID = '$patronID'";
+            $patronNameResult = $conn->query($patronNameQuery);
 
-        if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
-            // Insert into checkoutTransactionItem
-            $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+            if ($patronNameResult->num_rows > 0) {
+                $patronNameRow = $patronNameResult->fetch_assoc();
+                $firstName = $patronNameRow["patronFirstName"];
+                $lastName = $patronNameRow["patronLastName"];
 
-            if ($conn->query($sql) === TRUE) {
-                // Update item status in the Item table
-                $updateItemStatusQuery = "UPDATE Item SET itemStatus = 'Checked Out' WHERE itemID = '$itemID'";
-                if ($conn->query($updateItemStatusQuery) === TRUE) {
-                    echo "<p>Item $itemID checked out to transaction $transactionID.</p>";
+                // Get the most recent transactionID
+                $transactionIDQuery = "SELECT MAX(transactionID) AS maxTransactionID FROM checkoutTransaction";
+                $transactionIDResult = $conn->query($transactionIDQuery);
+
+                // Check if there are transactions
+                if ($transactionIDResult->num_rows > 0) {
+                    $transactionID = $transactionIDResult->fetch_assoc()['maxTransactionID'];
+
+                    // Check if the item is not already checked out in the current transaction
+                    $checkCheckoutQuery = "SELECT * FROM checkoutTransactionItem WHERE transactionID = '$transactionID' AND itemID = '$itemID'";
+                    $checkoutResult = $conn->query($checkCheckoutQuery);
+
+                    // Check if ItemID exists and is available
+                    $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Available'";
+                    $itemResult = $conn->query($checkItemQuery);
+
+                    if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
+                        // Insert into checkoutTransactionItem
+                        $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+
+                        if ($conn->query($sql) === TRUE) {
+                            // Update item status in the Item table
+                            $updateItemStatusQuery = "UPDATE Item SET itemStatus = 'Checked Out' WHERE itemID = '$itemID'";
+                            if ($conn->query($updateItemStatusQuery) === TRUE) {
+                                echo "<p>Item $itemID checked out to $firstName $lastName. Patron $patronID now has $bookCount items checked out.</p>";
+                            } else {
+                                echo "<p>Error updating item status: " . $updateItemStatusQuery . "<br>" . $conn->error . "</p>";
+                            }
+                        } else {
+                            echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
+                        }
+                    } else {
+                        echo "<p>Error: Item ID is not available or is already checked out.</p>";
+                    }
                 } else {
-                    echo "<p>Error updating item status: " . $updateItemStatusQuery . "<br>" . $conn->error . "</p>";
+                    echo "<p>Error: No transactions found.</p>";
                 }
             } else {
-                echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
+                echo "<p>Error fetching patron name: " . $patronNameQuery . "<br>" . $conn->error . "</p>";
             }
         } else {
-            echo "<p>Error: Item ID is not available or is already checked out.</p>";
+            echo "<p>Error: Maximum number of books allowed reached for this patron.</p>";
         }
     } else {
-        echo "<p>Error: No transactions found.</p>";
+        echo "<p>Error fetching book count: " . $bookCountQuery . "<br>" . $conn->error . "</p>";
     }
 
     // Close the database connection
     $conn->close();
 }
 ?>
+
 
 
 <form method="post" action="">
