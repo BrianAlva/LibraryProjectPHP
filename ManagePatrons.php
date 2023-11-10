@@ -35,13 +35,12 @@
     <p>You have successfully logged in.</p>
 
     <!-- Buttons to navigate to different pages -->
-    <a href="ManageItems.php">Manage Items</a>
-    <a href="ManagePatrons.php">Manage Patrons</a>
-    <a href="NewCheckOut.php">Check Out</a>
-    
+    <a href="CreatePatron.php">Create New Patron</a>
+    <a href="EditPatron.php">Edit Patron</a>
+    <a href="DeletePatron.php">Delete Patron</a>
 
     <br><br>
 
-    <a href="login.php">Log Out</a> <!-- Provide a link to log out -->
+    <a href="welcome.php">Back to Home</a> <!-- Provide a link to log out -->
 </body>
 </html>
