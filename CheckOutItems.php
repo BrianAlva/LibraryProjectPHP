@@ -99,7 +99,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
 
             if ($conn->query($sql) === TRUE) {
-                echo "<p>Item $itemID checked out to transaction $transactionID.</p>";
+                // Update item status in the Item table
+                $updateItemStatusQuery = "UPDATE Item SET itemStatus = 'Checked Out' WHERE itemID = '$itemID'";
+                if ($conn->query($updateItemStatusQuery) === TRUE) {
+                    echo "<p>Item $itemID checked out to transaction $transactionID.</p>";
+                } else {
+                    echo "<p>Error updating item status: " . $updateItemStatusQuery . "<br>" . $conn->error . "</p>";
+                }
             } else {
                 echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
             }
@@ -114,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
 
 <form method="post" action="">
     <label for="itemID">Item ID:</label>
