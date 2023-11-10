@@ -68,57 +68,51 @@
     </style>
 </head>
 <body>
-    <h2>Check Out Item</h2>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Include the database configuration
-        include "db_config.php";
+<h2>Check Out Item</h2>
 
-        // Get the patronID and itemID from the form
-        $patronID = $_POST["patronID"];
-        $itemID = $_POST["ItemID"];
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Include the database configuration
+    include "db_config.php";
 
-        // Check if PatronID exists
-        $checkIDQuery = "SELECT * FROM Patron WHERE patronID = '$patronID'";
-        $result = $conn->query($checkIDQuery);
+    $itemID = $_POST["itemID"];
 
-        // Check if ItemID exists
-        $checkIDQuery = "SELECT * FROM Item WHERE itemID = '$itemID'";
-        $result = $conn->query($checkIDQuery);
+    // Check if ItemID exists
+    $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID'";
+    $itemResult = $conn->query($checkItemQuery);
 
-        if ($result->num_rows > 0 && $result->num_rows > 0){
-            // patronID exists, proceed with the insert
-            $sql = "INSERT INTO checkoutTransactionItem (patronID, itemID) VALUES ('$patronID', '$itemID')";
-            
-            if ($conn->query($sql) === TRUE) {
-                echo "<p>Record added successfully.</p>";
-            } else {
-                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
-            }
+    // Get the most recent transactionID
+    $transactionIDQuery = "SELECT MAX(transactionID) AS maxTransactionID FROM checkoutTransaction";
+    $transactionIDResult = $conn->query($transactionIDQuery);
+
+    // Check if there are transactions
+    if ($transactionIDResult->num_rows > 0) {
+        $transactionID = $transactionIDResult->fetch_assoc()['maxTransactionID'];
+
+        // Insert into checkoutTransactionItem
+        $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "<p>Item $itemID was checked out.</p>";
         } else {
-            // patronID doesn't exist, provide an error message
-            echo "<p>Error: Patron ID does not exist.</p>";
+            echo "<p>Error inserting into checkoutTransactionItem: " . $sql . "<br>" . $conn->error . "</p>";
         }
-
-        // Close the database connection
-        $conn->close();
+    } else {
+        echo "<p>Error: No transactions found.</p>";
     }
 
-    ?>
+    // Close the database connection
+    $conn->close();
+}
+?>
 
-    <form method="post" action="">
+<form method="post" action="">
+    <label for="itemID">Item ID:</label>
+    <input type="text" name="itemID" required maxlength="4">
+    <input type="submit" value="Check Out Item">
+</form>
 
-        <label for="patronID">Patron ID:</label>
-        <input type="text" name="patronID" required maxlength="4">
-
-        <label for="itemID">Item ID:</label>
-        <input type="text" name="itemID" required maxlength="4">
-
-        <input type="submit" value="Create Transaction">
-
-    </form>
-
-    <a href="welcome.php">Back to Welcome</a>
+<a href="welcome.php">Back to Welcome</a>
 </body>
 </html>
