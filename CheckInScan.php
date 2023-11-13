@@ -87,6 +87,10 @@
             // SQL query to check-in scanned item to update the "Item" table
             $sql = "UPDATE Item 
                     SET itemStatus = 'Checked In'
+                    WHERE itemID = $itemID
+                     
+                    UPDATE checkoutTransactionItem 
+                    SET transactionItemStatus = 'Checked In'
                     WHERE itemID = $itemID";
         
             if ($conn->query($sql) === TRUE) {
