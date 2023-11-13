@@ -18,22 +18,22 @@ CREATE TABLE Patron (
 );
 
 CREATE TABLE Item (
-    itemISBN VARCHAR(17) NOT NULL,
-    itemID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT = 3000,
-    itemTitle VARCHAR(90) NOT NULL,
-    itemType VARCHAR(15) NOT NULL,
-    itemYearPublished YEAR NOT NULL,
-    itemPublisher VARCHAR(45) NOT NULL,
-    itemLoC VARCHAR(16) NOT NULL,
-    itemCost DECIMAL(7,2) NOT NULL DEFAULT 0.00,
-    itemAquisitionDate DATE NOT NULL DEFAULT (CURRENT_DATE),
-    itemCopy INT NOT NULL,
-    itemBranch VARCHAR(16) NOT NULL,
-    itemStatus VARCHAR(16) NOT NULL,
-    itemSecurityDeviceFlag VARCHAR(16),
-    itemDamage VARCHAR(16) NOT NULL,
-    PRIMARY KEY (itemID),
-    CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos'))
+	itemISBN VARCHAR(17) NOT NULL,
+	itemID SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT = 3000,
+	itemTitle VARCHAR(90) NOT NULL,
+	itemType VARCHAR(15) NOT NULL,
+	itemYearPublished YEAR NOT NULL,
+	itemPublisher VARCHAR(45) NOT NULL,
+	itemLoC VARCHAR(16) NOT NULL,
+	itemCost DECIMAL(7,2) NOT NULL DEFAULT 0.00,
+	itemAquisitionDate DATE NOT NULL DEFAULT (CURRENT_DATE),
+	itemCopy INT NOT NULL,
+	itemBranch VARCHAR(16) NOT NULL,
+	itemStatus VARCHAR(16) NOT NULL,
+	itemSecurityDeviceFlag VARCHAR(16),
+	itemDamage VARCHAR(16) NOT NULL,
+	PRIMARY KEY (itemID),
+	CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos'))
 );
 
 
@@ -86,13 +86,14 @@ CREATE TABLE checkoutTransactionItem (
 	transactionID SMALLINT UNSIGNED NOT NULL,
 	itemID SMALLINT UNSIGNED NOT NULL,
 	dueDate DATE NOT NULL DEFAULT (CURRENT_DATE),
-    returnDATE DATE NOT NULL DEFAULT (CURRENT_DATE),
-    CONSTRAINT fk_checkoutTransactionItem_checkoutTransaction FOREIGN KEY (transactionID) REFERENCES checkoutTransaction (transactionID)
+	returnDATE DATE NOT NULL DEFAULT (CURRENT_DATE),
+	CONSTRAINT fk_checkoutTransactionItem_checkoutTransaction FOREIGN KEY (transactionID) REFERENCES checkoutTransaction (transactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_checkoutTransactionItem_Item FOREIGN KEY (itemID) REFERENCES Item (itemID)
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
+	PRIMARY KEY (transactionID, itemID)
 );
 
 
