@@ -77,17 +77,29 @@
     
         // Scan item
         $itemID = $_POST["itemID"];
+
+        // Check if ItemID exists and is checked-out
+        $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Checked-Out'";
+        $itemResult = $conn->query($checkItemQuery);
+
+        if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
     
-        // SQL query to check-in scanned item to update the "Item" table
-        $sql = "UPDATE Item 
-                SET itemStatus = 'Checked-In'
-                WHERE itemID = $itemID";
-    
-        if ($conn->query($sql) === TRUE) {
-            echo "<p>Item successfully checked-in.</p>";
-        } else {
-            echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+            // SQL query to check-in scanned item to update the "Item" table
+            $sql = "UPDATE Item 
+                    SET itemStatus = 'Checked-In'
+                    WHERE itemID = $itemID";
+        
+            if ($conn->query($sql) === TRUE) {
+                echo "<p>Item successfully checked-in.</p>";
+            } else {
+                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+            }
+
         }
+
+        else {
+            echo "<p>Error: Item ID is not available or is available.</p>";
+            }
 
         // Close the database connection
         $conn->close();
