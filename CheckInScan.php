@@ -98,7 +98,7 @@
         }
 
         else {
-            echo "<p>Error: Item ID is not available or is available.</p>";
+            echo "<p>Error: Item ID is not valid or item is available.</p>";
             }
 
         // Close the database connection
