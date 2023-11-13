@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Check-In Item</title>
+    <title>Check In Item</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,7 +68,7 @@
     </style>
 </head>
 <body>
-    <h2>Check-In Item</h2>
+    <h2>Check In Item</h2>
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -79,18 +79,18 @@
         $itemID = $_POST["itemID"];
 
         // Check if ItemID exists and is checked-out
-        $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Checked-Out'";
+        $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Checked Out'";
         $itemResult = $conn->query($checkItemQuery);
 
         if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
     
             // SQL query to check-in scanned item to update the "Item" table
             $sql = "UPDATE Item 
-                    SET itemStatus = 'Checked-In'
+                    SET itemStatus = 'Checked In'
                     WHERE itemID = $itemID";
         
             if ($conn->query($sql) === TRUE) {
-                echo "<p>Item successfully checked-in.</p>";
+                echo "<p>Item successfully checked in.</p>";
             } else {
                 echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
             }
@@ -111,7 +111,7 @@
         <label for="itemID">Item ID:</label>
         <input type="number" step="1" name="itemID" required max="65535">
     
-        <input type="submit" value="Check-in Item">
+        <input type="submit" value="Check In Item">
     </form>
     
     <a href="welcome.php">Back to Welcome</a>
