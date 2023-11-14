@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
                         // Insert into checkoutTransactionItem
-                        $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID) VALUES ('$transactionID', '$itemID')";
+                        $sql = "INSERT INTO checkoutTransactionItem (transactionID, itemID, transactionItemStatus) VALUES ('$transactionID', '$itemID', 'Checked Out')";
 
                         if ($conn->query($sql) === TRUE) {
                             // Update item status in the Item table
