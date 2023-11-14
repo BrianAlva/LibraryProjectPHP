@@ -33,7 +33,7 @@ CREATE TABLE Item (
 	itemSecurityDeviceFlag VARCHAR(16),
 	itemDamage VARCHAR(16) NOT NULL,
 	PRIMARY KEY (itemID),
-	CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos'))
+	CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos')),
 	CONSTRAINT chkItemStatus CHECK (ItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out'))
 );
 
@@ -95,7 +95,7 @@ CREATE TABLE checkoutTransactionItem (
 	returnDATE DATE NOT NULL DEFAULT (CURRENT_DATE),
 	transactionItemStatus VARCHAR(16) NOT NULL,
 	PRIMARY KEY (transactionID, itemID),
-	CONSTRAINT chkTransactionItemStatus CHECK (transactionItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out'))
+	CONSTRAINT chkTransactionItemStatus CHECK (transactionItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out')),
 	CONSTRAINT fk_checkoutTransactionItem_checkoutTransaction FOREIGN KEY (transactionID) REFERENCES checkoutTransaction (transactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
