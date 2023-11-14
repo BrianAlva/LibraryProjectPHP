@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bookCountQuery = "SELECT COUNT(*) AS bookCount
                        FROM checkoutTransaction ct 
                        JOIN checkoutTransactionItem cti ON ct.transactionID = cti.transactionID
-                       WHERE ct.patronID = '$patronID'";
+                       WHERE ct.patronID = '$patronID' AND cti.transactionItemStatus = 'Checked Out'";
     $bookCountResult = $conn->query($bookCountQuery);
 
     if ($bookCountResult->num_rows > 0) {
@@ -129,6 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Update item status in the Item table
                             $updateItemStatusQuery = "UPDATE Item SET itemStatus = 'Checked Out' WHERE itemID = '$itemID'";
                             if ($conn->query($updateItemStatusQuery) === TRUE) {
+
+                                $bookCount++;
+                                
                                 echo "<p>Item $itemID checked out to $firstName $lastName. Patron $patronID now has $bookCount items checked out.</p>";
                             } else {
                                 echo "<p>Error updating item status: " . $updateItemStatusQuery . "<br>" . $conn->error . "</p>";
