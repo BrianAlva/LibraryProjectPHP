@@ -33,7 +33,7 @@ CREATE TABLE Item (
 	itemSecurityDeviceFlag VARCHAR(16),
 	itemDamage VARCHAR(16) NOT NULL,
 	PRIMARY KEY (itemID),
-	CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos')),
+	CONSTRAINT chkItemType CHECK (itemType IN ('Books', 'Periodicals', 'Recordings', 'Videos')),
 	CONSTRAINT chkItemStatus CHECK (ItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out'))
 );
 
