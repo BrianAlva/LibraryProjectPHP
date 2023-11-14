@@ -140,13 +140,24 @@
         </select>
 
         <label for="itemStatus">Status:</label>
-        <input type="text" name="itemStatus" required maxlength="16">
+        <select name="itemStatus" required>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+        </select>
 
         <label for="itemSecurityDeviceFlag">Security Device Flag:</label>
-        <input type="text" name="itemSecurityDeviceFlag" maxlength="16">
+        <select name="itemSecurityDeviceFlag" required>
+            <option value="Activated">Activated</option>
+            <option value="Deactivated">Deactivated</option>
+        </select>
 
         <label for="itemDamage">Damage:</label>
-        <input type="text" name="itemDamage" required maxlength="16">
+        <select name="itemDamage" required>
+            <option value="Like New">Like New</option>
+            <option value="Great">Great</option>
+            <option value="Repairable">Repairable</option>
+            <option value="Unrepairable">Unrepairable</option>
+        </select>
 
         <input type="submit" value="Add New Item">
     </form>
@@ -154,4 +165,3 @@
     <a href="welcome.php">Back to Welcome</a>
 </body>
 </html>
-
