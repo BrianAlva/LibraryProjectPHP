@@ -34,6 +34,7 @@ CREATE TABLE Item (
 	itemDamage VARCHAR(16) NOT NULL,
 	PRIMARY KEY (itemID),
 	CONSTRAINT chkItemType CHECK (itemType IN ('books', 'periodicals', 'recordings', 'videos'))
+	CONSTRAINT chkItemStatus CHECK (ItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out'))
 );
 
 ALTER TABLE Item
@@ -67,7 +68,6 @@ AUTO_INCREMENT = 2000;
 CREATE TABLE ItemAuthor (
 	itemID SMALLINT UNSIGNED NOT NULL,
 	authorID SMALLINT UNSIGNED NOT NULL,
-	authorID2 SMALLINT UNSIGNED,
 	PRIMARY KEY (itemID, authorID),
 	CONSTRAINT fk_ItemAuthor_Item FOREIGN KEY (itemID) REFERENCES Item (itemID)
 		ON DELETE RESTRICT
@@ -91,13 +91,15 @@ CREATE TABLE checkoutTransaction (
 CREATE TABLE checkoutTransactionItem (
 	transactionID SMALLINT UNSIGNED NOT NULL,
 	itemID SMALLINT UNSIGNED NOT NULL,
-	dueDate DATE NOT NULL DEFAULT (CURRENT_DATE),
+	dueDate DATE NOT NULL DEFAULT (DATE_ADD(CURRENT_DATE, INTERVAL 2 WEEK)),
 	returnDATE DATE NOT NULL DEFAULT (CURRENT_DATE),
+	transactionItemStatus VARCHAR(16) NOT NULL,
+	PRIMARY KEY (transactionID, itemID),
+	CONSTRAINT chkTransactionItemStatus CHECK (transactionItemStatus IN ('Available', 'Not Available', 'Checked In', 'Checked Out'))
 	CONSTRAINT fk_checkoutTransactionItem_checkoutTransaction FOREIGN KEY (transactionID) REFERENCES checkoutTransaction (transactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	CONSTRAINT fk_checkoutTransactionItem_Item FOREIGN KEY (itemID) REFERENCES Item (itemID)
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	PRIMARY KEY (transactionID, itemID)
+		ON UPDATE CASCADE
 );
