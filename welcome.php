@@ -40,9 +40,5 @@
     <a href="NewCheckOut.php">Check Out</a>
     <a href="HomePageTemplate.html">Example Design of Website</a>
     
-
-    <br><br>
-
-    <a href="login.php">Log Out</a> <!-- Provide a link to log out -->
 </body>
 </html>
