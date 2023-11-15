@@ -103,7 +103,7 @@
         <input type="submit" value="Delete Record">
     </form>
 
-    <a href="welcome.php">Back to Welcome</a>
+    <a href="index.html">Back to Welcome</a>
 </body>
 </html>
 
