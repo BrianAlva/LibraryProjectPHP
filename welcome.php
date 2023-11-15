@@ -17,7 +17,7 @@
 
         a {
             text-decoration: none;
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 10px 20px;
             margin: 5px 0;
@@ -26,7 +26,7 @@
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #5A5A5A;
         }
     </style>
 </head>
@@ -38,6 +38,7 @@
     <a href="ManageItems.php">Manage Items</a>
     <a href="ManagePatrons.php">Manage Patrons</a>
     <a href="NewCheckOut.php">Check Out</a>
+    <a href="CheckInScan.php">Check In</a>
     <a href="HomePageTemplate.html">Example Design of Website</a>
     
 </body>
