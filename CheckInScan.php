@@ -74,27 +74,31 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include the database configuration
         include "db_config.php";
-    
+
         // Scan item
         $itemID = $_POST["itemID"];
 
         // Check if ItemID exists and is checked-out
-        $checkItemQuery = "SELECT * FROM Item WHERE itemID = '$itemID' AND itemStatus = 'Checked Out'";
+        $checkItemQuery = "SELECT *
+                          FROM Item
+                          WHERE itemID = '$itemID'
+                          AND itemStatus = 'Checked Out'";
+        // AND itemStatus = 'Checked Out'";
         $itemResult = $conn->query($checkItemQuery);
 
-        if ($itemResult->num_rows > 0 && $checkoutResult->num_rows === 0) {
-    
-            // SQL query to check-in scanned item to update the "Item" table
-            $sql = "UPDATE Item 
-                    SET itemStatus = 'Checked In'
-                    WHERE itemID = $itemID";
+        if ($itemResult->num_rows > 0) {
 
-            $sql2 = "UPDATE checkoutTransactionItem 
-                    SET transactionItemStatus = 'Checked In'
-                    WHERE itemID = $itemID";
-        
-            if ($conn->query($sql) === TRUE AND $conn->query($sql2) === TRUE ) {
-                echo "<p>Item successfully checked in.</p>";
+            // SQL query to check-in scanned item to update the "Item" table
+            $sql = "UPDATE Item
+                    SET itemStatus = 'Checked In'
+                    WHERE itemID = '$itemID'";
+
+            $sql2 = "UPDATE checkoutTransactionItem
+                    SET TransactionItemStatus = 'Checked In'
+                    WHERE itemID = '$itemID'";
+
+            if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
+                echo "<p>Item successfully checked-in.</p>";
             } else {
                 echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
             }
@@ -102,22 +106,22 @@
         }
 
         else {
-            echo "<p>Error: Item ID is not valid or item is available.</p>";
+            echo "<p>Error: Item ID is not available or is available.</p>";
             }
 
         // Close the database connection
         $conn->close();
     }
     ?>
-    
+
     <form method="post" action="">
-    
+
         <label for="itemID">Item ID:</label>
         <input type="number" step="1" name="itemID" required max="65535">
-    
-        <input type="submit" value="Check In Item">
+
+        <input type="submit" value="Check-in Item">
     </form>
-    
+
     <a href="index.html">Back to Welcome</a>
 </body>
 </html>
