@@ -89,7 +89,7 @@
                     SET itemStatus = 'Checked In'
                     WHERE itemID = $itemID";
 
-            $sql = "UPDATE checkoutTransactionItem 
+            $sql2 = "UPDATE checkoutTransactionItem 
                     SET transactionItemStatus = 'Checked In'
                     WHERE itemID = $itemID";
         
