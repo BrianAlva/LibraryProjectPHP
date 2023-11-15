@@ -38,6 +38,7 @@
     <a href="ManageItems.php">Manage Items</a>
     <a href="ManagePatrons.php">Manage Patrons</a>
     <a href="NewCheckOut.php">Check Out</a>
+    <a href="HomePageTemplate.html">Example Design of Website</a>
     
 
     <br><br>
