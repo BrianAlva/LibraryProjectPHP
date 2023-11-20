@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>W3.CSS Template</title>
+  <title>Delete Patron</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -61,8 +61,20 @@
     }
 
     .w3-display-top {
-      margin-top: 50px; /* Adjust the margin to move the text lower */
+      /*margin-top: 50px;  Adjust the margin to move the text lower */
+	  
     }
+	
+	.w3-black {
+		height: 60px;
+	}
+	
+	.delForm {
+			margin-top : 70px;
+			
+			margin-left : 150px;
+			
+	}
   </style>
 </head>
 <body>
@@ -70,11 +82,12 @@
 <!-- Links (sit on top) -->
 <div class="w3-top">
     <div class="w3-row w3-padding w3-black">
-    <div class="w3-col s3" style="width: 20%"><a href="welcome.php" class="w3-button w3-block w3-black">HOME</a></div>
+	<div class="w3-col s3" style="width: 100%;font-size:37px" class="w3-text-white">Delete Patron Record</div>
+    <!--<div class="w3-col s3" style="width: 20%"><a href="welcome.php" class="w3-button w3-block w3-black">HOME</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="ManagePatrons.php" class="w3-button w3-block w3-black">MANAGE PATRONS</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="ManageItems" class="w3-button w3-block w3-black">MANAGE ITEMS</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="CheckOutItems.php" class="w3-button w3-block w3-black">CHECK OUT</a></div>
-    <div class="w3-col s3" style="width: 20%"><a href="#check-in" class="w3-button w3-block w3-black">CHECK IN</a></div>
+    <div class="w3-col s3" style="width: 20%"><a href="#check-in" class="w3-button w3-block w3-black">CHECK IN</a></div> -->
   </div>
 </div>
 
@@ -84,7 +97,7 @@
     <span class="w3-tag">Open from 8am to 10pm</span>
   </div>
   <div class="w3-display-top w3-center">
-    <span class="w3-text-white" style="font-size:37px"><br>Delete Patron Record</span>
+    <span class="w3-text-white" style="font-size:37px"><br></span>
 	<?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Include the database configuration
@@ -119,6 +132,7 @@
 	
   </div> -->
   
+  <div class="delForm">
   <form method="post" action="">
         <label for="patronID">Patron ID:</label>
         <input type="number" name="patronID" required>
@@ -126,6 +140,11 @@
         <input type="submit" value="Delete Patron Record">
     </form>
 	
+	<div style="width: 20%;padding-left: 70px;padding-top: 30px;font-size:26px">
+		<a href="welcome.php" class="w3-button w3-block w3-black">Back to HOME</a>
+	</div>
+	
+  </div>	
   <div class="w3-display-bottomright w3-center w3-padding-large w3-hide-small">
     <span class="w3-tag">456 Literary Lane, 28403</span>
   </div>
