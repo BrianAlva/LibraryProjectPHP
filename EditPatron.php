@@ -11,7 +11,7 @@
         }
 
         h2 {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 10px;
         }
@@ -31,7 +31,7 @@
         }
 
         th {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
         }
 
