@@ -85,7 +85,7 @@
 	<div class="w3-col s3" style="width: 100%;font-size:37px" class="w3-text-white">Delete Patron Record</div>
     <div class="w3-col s3" style="width: 20%"><a href="welcome.php" class="w3-button w3-block w3-black">HOME</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="ManagePatrons.php" class="w3-button w3-block w3-black">MANAGE PATRONS</a></div>
-    <div class="w3-col s3" style="width: 20%"><a href="ManageItems.phps" class="w3-button w3-block w3-black">MANAGE ITEMS</a></div>
+    <div class="w3-col s3" style="width: 20%"><a href="ManageItems.php" class="w3-button w3-block w3-black">MANAGE ITEMS</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="NewCheckOut.php" class="w3-button w3-block w3-black">CHECK OUT</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="CheckInScan.php" class="w3-button w3-block w3-black">CHECK IN</a></div>
   </div>
