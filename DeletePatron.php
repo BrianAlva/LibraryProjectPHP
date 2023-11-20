@@ -17,8 +17,7 @@
     .bgimg {
       background-position: center;
       background-size: cover;
-      background-image: url("managepatronbgimg.png");
-      min-height: 75%;
+      background-image: url("https://images.unsplash.com/photo-1595123550441-d377e017de6a?q=80&w=3106&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     }
 
     .menu {
@@ -157,5 +156,3 @@
   <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
     <p>Powered by <a title="Wisdom" target="_blank" class="w3-hover-text-green">Wisdom</a></p>
   </footer>
-
-
