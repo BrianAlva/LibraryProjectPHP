@@ -167,6 +167,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" name="itemID" required maxlength="4">
     <input type="submit" value="Check Out Item">
 </form>
+<form method="post" action="CheckOutReceipt.php">
+    <input type="submit" name="checkoutReceipt" value="CheckOutReceipt">
+</form>
 
 <a href="welcome.php">Back to Welcome</a>
 </body>
