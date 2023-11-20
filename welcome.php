@@ -20,14 +20,31 @@
             background-image: url("https://images.unsplash.com/photo-1595123550441-d377e017de6a?q=80&w=3106&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
             min-height: 75%;
         }
+
         
         .menu {
             display: none;
+      }
+
+        a {
+            text-decoration: none;
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: block;
+        }
+
+        a:hover {
+            background-color: #5A5A5A;
+
         }
     </style>
 </head>
 
 <body>
+
 
     <!-- Links (sit on top) -->
     <div class="w3-top">
@@ -79,6 +96,7 @@
             }
             document.getElementById("myLink").click();
         </script>
+
 
 </body>
 
