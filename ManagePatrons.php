@@ -15,7 +15,7 @@ body, html {
 .bgimg {
   background-position: center;
   background-size: cover;
-  background-image: url("managepatronbgimg.png");
+  background-image: url("https://images.unsplash.com/photo-1595123550441-d377e017de6a?q=80&w=3106&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   min-height: 75%;
 }
 
@@ -43,9 +43,9 @@ body, html {
   <div class="w3-row w3-padding w3-black">
     <div class="w3-col s3" style="width: 20%"><a href="welcome.php" class="w3-button w3-block w3-black">HOME</a></div>
     <div class="w3-col s3" style="width: 20%"><a href="ManagePatrons.php" class="w3-button w3-block w3-black">MANAGE PATRONS</a></div>
-    <div class="w3-col s3" style="width: 20%"><a href="ManageItems" class="w3-button w3-block w3-black">MANAGE ITEMS</a></div>
-    <div class="w3-col s3" style="width: 20%"><a href="CheckOutItems.php" class="w3-button w3-block w3-black">CHECK OUT</a></div>
-    <div class="w3-col s3" style="width: 20%"><a href="#check-in" class="w3-button w3-block w3-black">CHECK IN</a></div>
+    <div class="w3-col s3" style="width: 20%"><a href="ManageItems.php" class="w3-button w3-block w3-black">MANAGE ITEMS</a></div>
+    <div class="w3-col s3" style="width: 20%"><a href="NewCheckOut.php" class="w3-button w3-block w3-black">CHECK OUT</a></div>
+    <div class="w3-col s3" style="width: 20%"><a href="CheckInScan.php" class="w3-button w3-block w3-black">CHECK IN</a></div>
   </div>
 </div>
 
