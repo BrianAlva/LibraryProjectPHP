@@ -81,14 +81,24 @@
         // SQL query to delete the record from the "Patron" table
         $sql = "DELETE FROM Patron WHERE patronID = $patronID";
 
-        if ($conn->query($sql) === TRUE) {
-            if ($conn->affected_rows > 0) {
-                echo "<p>Record with Patron ID $patronID has been deleted.</p>";
+        $sql2 = "SELECT * FROM checkoutTransaction WHERE patronID = $patronID";
+
+        $result = $conn->query($sql2);
+
+        if ($result->num_rows = 0) {
+
+            if ($conn->query($sql) === TRUE) {
+                if ($conn->affected_rows > 0) {
+                    echo "<p>Record with Patron ID $patronID has been deleted.</p>";
+                } else {
+                    echo "<p>No record found with Patron ID $patronID.</p>";
+                }
             } else {
-                echo "<p>No record found with Patron ID $patronID.</p>";
+                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
             }
-        } else {
-            echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+        }
+        else {
+            echo "<p>Cannot delete Patron ID $patronID. Has rows in checkoutTransaction</p>";
         }
 
         // Close the database connection
