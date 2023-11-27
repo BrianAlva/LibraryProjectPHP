@@ -85,7 +85,7 @@
 
         $result = $conn->query($sql2);
 
-        if ($result->num_rows = 0) {
+        if ($result->num_rows == 0) {
 
             if ($conn->query($sql) === TRUE) {
                 if ($conn->affected_rows > 0) {
