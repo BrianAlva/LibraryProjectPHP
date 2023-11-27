@@ -42,6 +42,6 @@
 
     <br><br>
 
-    <a href="welcome.php">Back to Home</a> <!-- Provide a link to log out -->
+    <a href="index.html">Back to Home</a> <!-- Provide a link to log out -->
 </body>
 </html>

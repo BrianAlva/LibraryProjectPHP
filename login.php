@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         // Successful login
-        header("Location: welcome.php"); // Redirect to a welcome page
+        header("Location: index.html"); // Redirect to a welcome page
         exit();
     } else {
         // Invalid credentials, display an error message
