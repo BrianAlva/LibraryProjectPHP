@@ -86,7 +86,7 @@
     
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td><a href='ChangeRow.php?item_id=" . $row["itemID"] . "'>" . $row["itemID"] . "</a></td>";
+            echo "<td><a href='ShelveRow.php?item_id=" . $row["itemID"] . "'>" . $row["itemID"] . "</a></td>";
             echo "<td>" . $row["itemISBN"] . "</td>";
             echo "<td>" . $row["itemTitle"] . "</td>";
             echo "<td>" . $row["itemType"] . "</td>";
@@ -112,7 +112,7 @@
     $conn->close();
     ?>
     
-    <a href="welcome.php">Back to Welcome</a>
+    <a href="index.html">Back to Welcome</a>
 </body>
 </html>
 </html>
