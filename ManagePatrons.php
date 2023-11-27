@@ -59,7 +59,7 @@ body, html {
     <div class="info-box">
       <p>Please choose one of the following</p>
       <a class="w3-button w3-black" href="CreatePatron.php">Create New Patron</a>
-      <button class="w3-button w3-black" onclick="editPatron()">Edit Patron</button>
+      <a class="w3-button w3-black" href="EditPatron.php">Edit Patron</a>
       <a class="w3-button w3-black" href="DeletePatron.php">Delete Patron</a>
     </div>
   </div>
