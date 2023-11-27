@@ -119,7 +119,7 @@ body, html {
     }
     ?>
 
-<form method="post" action=""></form>
+<form method="post" action="">
     <div class="login-box">
       
       <label for="patronID" class="white-text" >Patron ID:</label>
