@@ -123,7 +123,7 @@ body, html {
     }
     ?>
 
-<form method="post" action=""></form>
+<form method="post" action="">
     <div class="login-box">
       
     <label for="itemISBN" class="white-text">ISBN:</label>
