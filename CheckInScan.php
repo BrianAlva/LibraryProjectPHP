@@ -132,7 +132,7 @@ body, html {
       $conn->close();
   }
   ?>
-  <form method="post" action=""></form>
+  <form method="post" action="">
     <div class="login-box">
       
 
