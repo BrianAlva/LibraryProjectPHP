@@ -120,7 +120,7 @@ body, html {
     }
     ?>
 
-<form method="post" action=""></form>
+<form method="post" action="">
     <div class="login-box">
     
         <label for="itemID" class="white-text">Item ID:</label>
