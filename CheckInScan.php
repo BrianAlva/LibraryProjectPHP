@@ -24,7 +24,9 @@ body, html {
 .menu {
   display: none;
 }
-
+.white-text {
+    color: white;
+}
 .login-box {
   background-color: black;
   width: 300px;
@@ -134,7 +136,7 @@ body, html {
     <div class="login-box">
       
 
-      <label for="itemID" >Item ID:</label>
+      <label for="itemID"  class="white-text">Item ID:</label>
       <input type="number" step="1" name="itemID" placeholder="Item ID:" >
 
       <button type="submit">Check-in Item</button>
