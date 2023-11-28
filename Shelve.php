@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Items</title>
+    <title>Shelve Items</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
         }
 
         h2 {
-            background-color: #000000;
+            background-color: #007BFF;
             color: #fff;
             padding: 10px;
         }
@@ -31,7 +31,7 @@
         }
 
         th {
-            background-color: #000000;
+            background-color: #007BFF;
             color: #fff;
         }
 
@@ -42,26 +42,26 @@
         a {
             display: block;
             text-align: center;
-            background-color: #000000;
+            background-color: #007BFF;
             color: #fff;
             padding: 10px;
             text-decoration: none;
         }
 
         a:hover {
-            background-color: #5A5A5A;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h2>Edit Items</h2>
+    <h2>Shelve Items</h2>
 
     <?php
     // Include the database configuration
     include "db_config.php";
 
-    // SQL query to retrieve data from the "book" table
-    $sql = "SELECT * FROM Item";
+    // SQL query to retrieve data from the "Item" table
+    $sql = "SELECT * FROM Item WHERE itemStatus='Checked In'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -86,7 +86,7 @@
     
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td><a href='ChangeRow.php?item_id=" . $row["itemID"] . "'>" . $row["itemID"] . "</a></td>";
+            echo "<td><a href='ShelveRow.php?item_id=" . $row["itemID"] . "'>" . $row["itemID"] . "</a></td>";
             echo "<td>" . $row["itemISBN"] . "</td>";
             echo "<td>" . $row["itemTitle"] . "</td>";
             echo "<td>" . $row["itemType"] . "</td>";
@@ -116,5 +116,3 @@
 </body>
 </html>
 </html>
-
-

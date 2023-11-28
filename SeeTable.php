@@ -113,7 +113,7 @@
     $conn->close();
     ?>
     
-    <a href="welcome.php">Back to Welcome</a>
+    <a href="index.html">Back to Welcome</a>
 </body>
 </html>
     

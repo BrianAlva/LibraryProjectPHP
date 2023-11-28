@@ -164,8 +164,7 @@ body, html {
 
 <form method="post" action="">
     <div class="login-box">
-      
-
+     
 
       <label for="patronID" class="white-text" >Patron ID:</label>
         <input type="text" name="patronID" required maxlength="4" placeholder="Patron ID:">
