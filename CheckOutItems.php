@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create New Patron</title>
+    <title>Check Out Items</title>
     <style>
         body {
             font-family: Arial, sans-serif;
