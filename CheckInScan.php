@@ -65,6 +65,13 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -117,15 +124,15 @@ body, html {
                   WHERE itemID = '$itemID'";
 
           if ($conn->query($sql) === TRUE && $conn->query($sql2) === TRUE) {
-              echo "<p>Item successfully checked-in.</p>";
+              echo '<p class = "error-message">Item successfully checked-in.</p>';
           } else {
-              echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+              echo '<p class = "error-message">Error updating"</p>';
           }
 
       }
 
       else {
-          echo "<p>Error: Item ID is not available or is available.</p>";
+          echo '<p class = "error-message">Error: Item ID is not checked out or does not exist</p>';
           }
 
       // Close the database connection
