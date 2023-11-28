@@ -70,6 +70,13 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -108,9 +115,9 @@ body, html {
 
         // Input validation
         if (strtotime($patronDateOfBirth) === false) {
-            echo "<p>Error: Date Of Birth should be in YYYY-MM-DD format.</p>";
+            echo '<p class="error-message">Error: Date Of Birth should be in YYYY-MM-DD format.</p>';
         } elseif (!is_numeric($patronContactPhone)) {
-            echo "<p>Error: Contact Phone should contain only numbers.</p>";
+            echo '<p class="error-message">Error: Contact Phone should contain only numbers.</p>';
         } else {
             // Valid input, proceed with inserting data into the database
 
@@ -119,7 +126,7 @@ body, html {
                     VALUES ('$patronLastName', '$patronFirstName', '$patronAddress', '$patronDateOfBirth', '$patronContactPhone')";
 
             if ($conn->query($sql) === TRUE) {
-                echo "<p>Record added successfully.</p>";
+                echo '<p class="error-message">Record added successfully.</p>';
             } else {
                 echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
             }

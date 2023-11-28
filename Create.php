@@ -66,6 +66,13 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -113,7 +120,7 @@ body, html {
                 VALUES ('$itemISBN', '$itemTitle', '$itemType', $itemYearPublished, '$itemPublisher', '$itemLoC', $itemCost, '$itemBranch', '$itemStatus', '$itemSecurityDeviceFlag', '$itemDamage')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<p>Record added successfully.</p>";
+            echo '<p class="error-message">Record added successfully.</p>';
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
         }

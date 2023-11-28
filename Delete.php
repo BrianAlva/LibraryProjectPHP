@@ -70,6 +70,13 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -107,10 +114,11 @@ body, html {
 
         if ($conn->query($sql) === TRUE) {
             if ($conn->affected_rows > 0) {
-                echo "<p>Record with Item ID $itemID has been deleted.</p>";
+                echo '<p class="success-message">Record with Item ID ' . $itemID . ' has been deleted.</p>';
             } else {
-                echo "<p>No record found with Item ID $itemID.</p>";
+                echo '<p class="error-message">No record found with Item ID ' . $itemID . '.</p>';
             }
+        
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
         }

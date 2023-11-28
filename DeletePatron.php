@@ -69,6 +69,12 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -109,20 +115,18 @@ body, html {
         $result = $conn->query($sql2);
 
         if ($result->num_rows == 0) {
-
-            if ($conn->query($sql) === TRUE) {
-                if ($conn->affected_rows > 0) {
-                    echo "<p>Record with Patron ID $patronID has been deleted.</p>";
-                } else {
-                    echo "<p>No record found with Patron ID $patronID.</p>";
-                }
-            } else {
-                echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
-            }
-        }
-        else {
-            echo "<p>Cannot delete Patron ID $patronID. Has rows in checkoutTransaction</p>";
-        }
+          if ($conn->query($sql) === TRUE) {
+              if ($conn->affected_rows > 0) {
+                  echo '<p class="success-message">Record with Patron ID ' . $patronID . ' has been deleted.</p>';
+              } else {
+                  echo '<p class="error-message">No record found with Patron ID ' . $patronID . '.</p>';
+              }
+          } else {
+              echo '<p class="error-message">Error: ' . $sql . '<br>' . $conn->error . '</p>';
+          }
+      } else {
+          echo '<p class="error-message">Cannot delete Patron ID ' . $patronID . '. Has rows in checkoutTransaction</p>';
+      }      
 
         // Close the database connection
         $conn->close();
