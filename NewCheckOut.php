@@ -66,6 +66,13 @@ body, html {
 .w3-display-top {
   margin-top: 50px; /* Adjust the margin to move the text lower */
 }
+
+.error-message {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 90px;
+}
 </style>
 </head>
 <body>
@@ -147,7 +154,7 @@ body, html {
                     }
                 } else {
                     // Payment balance is not 0.00, display message
-                    echo "<p>Existing Balance of $paymentBalance needs to be paid.</p>";
+                    echo '<p class="error-message">Existing Balance of ' . $paymentBalance . ' needs to be paid.</p>';
                 }
             } else {
                 echo "<p>Error fetching balance: " . $balanceQuery . "<br>" . $conn->error . "</p>";
@@ -166,9 +173,8 @@ body, html {
     <div class="login-box">
       
 
-
       <label for="patronID" class="white-text" >Patron ID:</label>
-        <input type="text" name="patronID" required maxlength="4" placeholder="Patron ID:">
+        <input type="text" id="patronID" name="patronID" required maxlength="4" placeholder="Patron ID:">
         <button type="submit">Create Transaction</button>
     </div>
   </form>
