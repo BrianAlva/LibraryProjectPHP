@@ -82,7 +82,7 @@ body, html {
         <div class="w3-col s2" style="width: 18%"><a href="ManageItems.php" class="w3-button w3-block w3-black" title="View all items&#10;Create new items&#10;Delete items&#10;Edit items">MANAGE ITEMS</a></div>
         <div class="w3-col s2" style="width: 15%"><a href="NewCheckOut.php" class="w3-button w3-block w3-black" title="Check out items">CHECK OUT</a></div>
         <div class="w3-col s2" style="width: 15%"><a href="CheckInScan.php" class="w3-button w3-block w3-black" title="Check in items">CHECK IN</a></div>
-        <div class="w3-col s2" style="width: 20%"><a href="Reshelving.php" class="w3-button w3-block w3-black" title="Manage reshelving of items">RESHELVE ITEMS</a></div>
+        <div class="w3-col s2" style="width: 20%"><a href="Shelve.php" class="w3-button w3-block w3-black" title="Manage reshelving of items">RESHELVE ITEMS</a></div>
     </div>
 </div>
 
@@ -131,7 +131,7 @@ body, html {
 
     ?>
 
-<form method="post" action=""></form>
+<form method="post" action="">
     <div class="login-box">
     <label for="patronLastName" class="white-text">Last Name:</label>
         <input type="text" name="patronLastName" required maxlength="90">
@@ -150,9 +150,6 @@ body, html {
 
         <button type="submit">Add New Patron</button>
       
-      
-
-      
     </div>
   </form>
 
@@ -168,8 +165,6 @@ body, html {
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
   <p>Powered by <a title="Wisdom" target="_blank" class="w3-hover-text-green">Wisdom</a></p>
 </footer>
-
-
 
 
 </body>

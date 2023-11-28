@@ -49,7 +49,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: ##5A5A5A;
+            background-color: #5A5A5A;
         }
 
         a {
