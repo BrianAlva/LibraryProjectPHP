@@ -10,12 +10,14 @@
 body, html {
   height: 100%;
   font-family: "Inconsolata", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .bgimg {
   background-position: center;
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1481437642641-2f0ae875f836?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("https://images.unsplash.com/photo-1587734459056-c0155b92d9a6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   min-height: 75%;
 }
 
@@ -23,16 +25,43 @@ body, html {
   display: none;
 }
 
-.info-box {
+.login-box {
   background-color: black;
+  width: 300px;
   padding: 20px;
   text-align: center;
-  color: white;
-  margin-top: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.info-box button {
-  margin: 10px;
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background-color: #45a049;
+}
+
+.w3-display-top {
+  margin-top: 50px; /* Adjust the margin to move the text lower */
 }
 </style>
 </head>
@@ -56,13 +85,12 @@ body, html {
     <span class="w3-tag">Open from 8am to 10pm</span>
   </div>
   <div class="w3-display-top w3-center">
-    <span class="w3-text-white" style="font-size:55px"><br>Manage Patrons</span>
-    <div class="info-box">
-      <p>Please choose one of the following</p>
-      <button class="w3-button w3-black" onclick="createNewPatron()">Create New Patron</button>
-      <button class="w3-button w3-black" onclick="editPatron()">Edit Patron</button>
-      <button class="w3-button w3-black" onclick="deletePatron()">Delete Patron</button>
-    </div>
+    <span class="w3-text-white" style="font-size:37px"><br>Check In Item</span>
+  </div>
+  <div class="login-box">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Item ID:">
+    <button onclick="login()">Check in Item</button>
   </div>
   <div class="w3-display-bottomright w3-center w3-padding-large w3-hide-small">
     <span class="w3-tag">456 Literary Lane, 28403</span>
@@ -78,17 +106,14 @@ body, html {
 </footer>
 
 <script>
-// Functions
-function createNewPatron() {
-  alert("Create New Patron executed!");
-}
+// Login Function
+function login() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
 
-function editPatron() {
-  alert("Edit Patron executed!");
-}
+  // You can add your authentication logic here
 
-function deletePatron() {
-  alert("Delete Patron executed!");
+  alert("Login attempted with\nUsername: " + username + "\nPassword: " + password);
 }
 </script>
 

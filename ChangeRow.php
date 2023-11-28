@@ -12,7 +12,7 @@
         }
 
         h2 {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 15px;
         }
@@ -40,7 +40,7 @@
         }
 
         input[type="submit"] {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -49,12 +49,12 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: ##5A5A5A;
         }
 
         a {
             text-decoration: none;
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 10px;
             border-radius: 5px;

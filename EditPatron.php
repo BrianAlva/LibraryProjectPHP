@@ -11,7 +11,7 @@
         }
 
         h2 {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 10px;
         }
@@ -31,7 +31,7 @@
         }
 
         th {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
         }
 
@@ -42,14 +42,14 @@
         a {
             display: block;
             text-align: center;
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
             padding: 10px;
             text-decoration: none;
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #5A5A5A;
         }
     </style>
 </head>
