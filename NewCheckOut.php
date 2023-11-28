@@ -144,24 +144,24 @@ body, html {
                                 header("Location: CheckOutItems.php");
                                 exit();
                             } else {
-                                echo "<p>Error inserting record: " . $insertQuery . "<br>" . $conn->error . "</p>";
+                              echo '<p class="error-message">Error inserting record</p>';
                             }
                         } else {
-                            echo "<p>Error: Maximum number of books allowed reached for this patron.</p>";
+                            echo '<p class="error-message">Error: Maximum number of books allowed reached for this patron.</p>';
                         }
                     } else {
-                        echo "<p>Error fetching book count: " . $bookCountQuery . "<br>" . $conn->error . "</p>";
+                        echo '<p class="error-message">Error fetching book count: ' . $bookCountQuery . '<br>' . $conn->error . '</p>';
                     }
                 } else {
                     // Payment balance is not 0.00, display message
                     echo '<p class="error-message">Existing Balance of ' . $paymentBalance . ' needs to be paid.</p>';
                 }
             } else {
-                echo "<p>Error fetching balance: " . $balanceQuery . "<br>" . $conn->error . "</p>";
+                echo '<p class="error-message">Error fetching balance</p>';
             }
         } else {
             // patronID doesn't exist, provide an error message
-            echo "<p>Error: Patron ID does not exist.</p>";
+            echo '<p class="error-message">Error: Patron ID does not exist.</p>';
         }
 
         // Close the database connection
