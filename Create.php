@@ -136,7 +136,55 @@ body, html {
                 VALUES ('$itemISBN', '$itemTitle', '$itemType', $itemYearPublished, '$itemPublisher', '$itemLoC', $itemCost, '$itemBranch', '$itemStatus', '$itemSecurityDeviceFlag', '$itemDamage')";
 
         if ($conn->query($sql) === TRUE) {
-            echo '<p class="error-message">Record added successfully.</p>';
+            
+            //Get the most recent itemID
+            $ItemIDQuery = "SELECT MAX(itemID) AS maxitemID FROM Item";
+            $ItemIDResult = $conn->query($ItemIDQuery);
+            $ItemID = $ItemIDResult->fetch_assoc()["maxitemID"];
+
+            // SQL query to insert Authors into Author Table
+            $sqlAuthor1 = "INSERT INTO Author (authorFirstName, authorLastName) VALUES ('$Author1FirstName', '$Author1LastName')";
+            
+            //SQL query to insert into ItemAuthor
+            $sqlItemAuthor1 = "INSERT INTO ItemAuthor (itemID, authorID) VALUES ('$ItemID', (SELECT MAX(authorID) FROM Author))";
+
+            if ($conn->query($sqlAuthor1) === TRUE) {
+                if ($conn->query($sqlItemAuthor1) === TRUE) {
+                                //Check if author 2 is empty
+                  if ($Author2FirstName != "" && $Author2LastName != "") {
+                    $sqlAuthor2 = "INSERT INTO Author (authorFirstName, authorLastName) VALUES ('$Author2FirstName', '$Author2LastName')";
+
+                    //SQL query to insert into ItemAuthor
+                    $sqlItemAuthor2 = "INSERT INTO ItemAuthor (itemID, authorID) VALUES ('$ItemID', (SELECT MAX(authorID) FROM Author))";
+
+                    if ($conn->query($sqlAuthor2) === TRUE) {
+                      if ($conn->query($sqlItemAuthor2) === TRUE) {
+                        echo '<p class="error-message">Record with Item ID ' . $ItemID . ' has been created.</p>';
+                      } else {
+                        echo '<p class="error-message">Error: ' . $sqlItemAuthor2 . '<br>' . $conn->error . '</p>';
+                      }
+                    } else {
+                      echo '<p class="error-message">Error: ' . $sqlAuthor2 . '<br>' . $conn->error . '</p>';
+                    }
+                  } else {
+                    echo '<p class="error-message">Record with Item ID ' . $ItemID . ' has been created.</p>';
+                  }
+
+                } else {
+                    echo '<p class="error-message">Error: ' . $sqlItemAuthor1 . '<br>' . $conn->error . '</p>';
+                }
+            } else {
+                echo '<p class="error-message">Error: ' . $sqlAuthor1 . '<br>' . $conn->error . '</p>';
+            }
+
+            //Check if author 2 is empty
+            if ($Author2FirstName != "" && $Author2LastName != "") {
+                $sqlAuthor2 = "INSERT INTO Author (authorFirstName, authorLastName) VALUES ('$Author2FirstName', '$Author2LastName')";
+
+                //SQL query to insert into ItemAuthor
+                $sqlItemAuthor2 = "INSERT INTO ItemAuthor (itemID, authorID) VALUES ('$ItemID', (SELECT MAX(authorID) FROM Author))";
+            }
+
         } else {
             echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
         }

@@ -110,13 +110,13 @@ body, html {
         $itemID = $_POST["itemID"];
 
         // SQL query to check if the item has related records in ItemAuthor
-        $sqlCheckItemAuthor = "SELECT * FROM ItemAuthor WHERE itemID = '$itemID'";
+        $sqlCheckItemTransaction = "SELECT * FROM checkoutTransactionItem WHERE itemID = '$itemID'";
 
         // Execute the query to check for ItemAuthor records
-        $resultItemAuthor = $conn->query($sqlCheckItemAuthor);
+        $resultItemTransaction = $conn->query($sqlCheckItemTransaction);
 
-        if ($resultItemAuthor->num_rows > 0) {
-            echo '<p class="error-message">Cannot delete Item ID ' . $itemID . '. Has related records in ItemAuthor.</p>';
+        if ($resultItemTransaction->num_rows > 0) {
+            echo '<p class="error-message">Cannot delete Item ID ' . $itemID . '. Has related records in CheckOut Transactions.</p>';
         } else {
             // SQL query to delete records from the "ItemAuthor" table
             $sqlDeleteItemAuthor = "DELETE FROM ItemAuthor WHERE itemID = '$itemID'";
