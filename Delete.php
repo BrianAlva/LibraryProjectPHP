@@ -109,24 +109,43 @@ body, html {
         // Retrieve the item ID to be deleted
         $itemID = $_POST["itemID"];
 
-        // SQL query to delete the record from the "Item" table
-        $sql = "DELETE FROM Item WHERE itemID = '$itemID'";
+        // SQL query to check if the item has related records in ItemAuthor
+        $sqlCheckItemAuthor = "SELECT * FROM ItemAuthor WHERE itemID = '$itemID'";
 
-        if ($conn->query($sql) === TRUE) {
-            if ($conn->affected_rows > 0) {
-                echo '<p class="success-message">Record with Item ID ' . $itemID . ' has been deleted.</p>';
-            } else {
-                echo '<p class="error-message">No record found with Item ID ' . $itemID . '.</p>';
-            }
-        
+        // Execute the query to check for ItemAuthor records
+        $resultItemAuthor = $conn->query($sqlCheckItemAuthor);
+
+        if ($resultItemAuthor->num_rows > 0) {
+            echo '<p class="error-message">Cannot delete Item ID ' . $itemID . '. Has related records in ItemAuthor.</p>';
         } else {
-            echo "<p>Error: " . $sql . "<br>" . $conn->error . "</p>";
+            // SQL query to delete records from the "ItemAuthor" table
+            $sqlDeleteItemAuthor = "DELETE FROM ItemAuthor WHERE itemID = '$itemID'";
+
+            // SQL query to delete the record from the "Item" table
+            $sqlDeleteItem = "DELETE FROM Item WHERE itemID = '$itemID'";
+
+            // Execute the query to delete from ItemAuthor
+            if ($conn->query($sqlDeleteItemAuthor) === TRUE) {
+                // Execute the query to delete from Item if ItemAuthor deletion was successful
+                if ($conn->query($sqlDeleteItem) === TRUE) {
+                    if ($conn->affected_rows > 0) {
+                        echo '<p class="error-message">Record with Item ID ' . $itemID . ' has been deleted.</p>';
+                    } else {
+                        echo '<p class="error-message">No record found with Item ID ' . $itemID . '.</p>';
+                    }
+                } else {
+                    echo '<p class="error-message">Error deleting from Item: ' . $sqlDeleteItem . '<br>' . $conn->error . '</p>';
+                }
+            } else {
+                echo '<p class="error-message">Error deleting from ItemAuthor: ' . $sqlDeleteItemAuthor . '<br>' . $conn->error . '</p>';
+            }
         }
 
         // Close the database connection
         $conn->close();
     }
-    ?>
+?>
+
 
 <form method="post" action="">
     <div class="login-box">

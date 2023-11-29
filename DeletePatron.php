@@ -117,7 +117,7 @@ body, html {
         if ($result->num_rows == 0) {
           if ($conn->query($sql) === TRUE) {
               if ($conn->affected_rows > 0) {
-                  echo '<p class="success-message">Record with Patron ID ' . $patronID . ' has been deleted.</p>';
+                  echo '<p class="error-message">Record with Patron ID ' . $patronID . ' has been deleted.</p>';
               } else {
                   echo '<p class="error-message">No record found with Patron ID ' . $patronID . '.</p>';
               }
@@ -157,7 +157,6 @@ body, html {
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
   <p>Powered by <a title="Wisdom" target="_blank" class="w3-hover-text-green">Wisdom</a></p>
 </footer>
-
 
 
 

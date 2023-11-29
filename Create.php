@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 <style>
+
 body, html {
   height: 100%;
   font-family: "Inconsolata", sans-serif;
@@ -18,61 +19,72 @@ body, html {
   background-position: center;
   background-size: cover;
   background-image: url("https://images.unsplash.com/photo-1572061486195-d811e12d0a10?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-  min-height: 75%;
-}
-
-.menu {
-  display: none;
-}
-.white-text {
-    color: white;
+  min-height: 80%;
 }
 
 .login-box {
   background-color: black;
-  width: 200px;
-  padding: 0px;
+  width: 300px;
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 1px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
-.login-box input {
-  width: 100%;
-  padding: 1px;
-  margin-bottom: 1px;
-  border: 1px solid #ccc;
-  border-radius: 1px;
-}
+    .w3-row.w3-padding.w3-black {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
-.login-box button {
-  width: 100%;
-  padding: 1px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 1px;
-  cursor: pointer;
-}
+    .w3-col.s2 {
+        width: 100%;
+    }
 
-.login-box button:hover {
-  background-color: #45a049;
-}
+    .w3-top {
+        position: static;
 
-.w3-display-top {
-  margin-top: 50px; /* Adjust the margin to move the text lower */
-}
+    }
 
-.error-message {
-  color: white;
-  text-align: center;
-  font-size: 20px;
-  margin-top: 90px;
-}
+    .login-box input {
+      width: 100%;
+      padding: 1px;
+      margin-bottom: 1px;
+      border: 1px solid #ccc;
+      border-radius: 1px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 1px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 1px;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #45a049;
+    }
+
+    .w3-display-top {
+      margin-top: 50px; /* Adjust the margin to move the text lower */
+    }
+
+    .error-message {
+      color: white;
+      text-align: center;
+      font-size: 20px;
+      margin-top: 90px;
+    }
+
+    .input-group {
+          display: flex;
+          align-items: center;
+      }
+
+    .login-box label {
+        margin-right: 10px; /* Adjust the margin as needed */
+        color: white;
+    }
 </style>
 </head>
 <body>
@@ -114,6 +126,10 @@ body, html {
         $itemStatus = $_POST["itemStatus"];
         $itemSecurityDeviceFlag = $_POST["itemSecurityDeviceFlag"];
         $itemDamage = $_POST["itemDamage"];
+        $Author1FirstName = $_POST["Author1FirstName"];
+        $Author1LastName = $_POST["Author1LastName"];
+        $Author2FirstName = $_POST["Author2FirstName"];
+        $Author2LastName = $_POST["Author2LastName"];
 
         // SQL query to insert a new record into the "Item" table
         $sql = "INSERT INTO Item (itemISBN, itemTitle, itemType, itemYearPublished, itemPublisher, itemLoC, itemCost, itemBranch, itemStatus, itemSecurityDeviceFlag, itemDamage)
@@ -133,19 +149,21 @@ body, html {
 <form method="post" action="">
     <div class="login-box">
       
-    <label for="itemISBN" class="white-text">ISBN:</label>
+        <label for="itemISBN" class="white-text">ISBN:</label>
         <input type="text" name="itemISBN" required maxlength="17">
 
         <label for="itemTitle" class="white-text">Title:</label>
         <input type="text" name="itemTitle" required maxlength="90">
 
-        <label for="itemType" class="white-text">Type:</label>
-        <select name="itemType" required>
-            <option value="books">Books</option>
-            <option value="periodicals">Periodicals</option>
-            <option value="recordings">Recordings</option>
-            <option value="videos">Videos</option>
-        </select>
+        <div class="input-group">
+            <label for="itemType" class="white-text">Type:</label>
+            <select name="itemType" required>
+                <option value="books">Books</option>
+                <option value="periodicals">Periodicals</option>
+                <option value="recordings">Recordings</option>
+                <option value="videos">Videos</option>
+            </select>
+        </div>
 
         <label for="itemYearPublished" class="white-text">Year Published:</label>
         <input type="number" name="itemYearPublished" required max = "2023">
@@ -159,33 +177,53 @@ body, html {
         <label for="itemCost" class="white-text">Cost:</label>
         <input type="number" step="0.01" name="itemCost" required max="99999.99">
 
-        <label for="itemBranch" class="white-text">Branch:</label>
-        <select name="itemBranch" required>
-            <option value="Main">Main</option>
-            <option value="OakTree">OakTree</option>
-            <option value="Peachtree">PeachTree</option>
-            <option value="WillowTree">WillowTree</option>
-        </select>
+        <div class="input-group">
+            <label for="itemBranch" class="white-text">Branch:</label>
+            <select name="itemBranch" required>
+                <option value="Main">Main</option>
+                <option value="OakTree">OakTree</option>
+                <option value="Peachtree">PeachTree</option>
+                <option value="WillowTree">WillowTree</option>
+            </select>
+        </div>
+       
+        <div class="input-group">
+            <label for="itemStatus" class="white-text">Status:</label>
+            <select name="itemStatus" required>
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
+            </select>
+        </div>
 
-        <label for="itemStatus" class="white-text">Status:</label>
-        <select name="itemStatus" required>
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
-        </select>
+        <div class="input-group">
+            <label for="itemSecurityDeviceFlag" class="white-text">Security Device Flag:</label>
+            <select name="itemSecurityDeviceFlag" required>
+                <option value="Activated">Activated</option>
+                <option value="Deactivated">Deactivated</option>
+            </select>
+        </div>
 
-        <label for="itemSecurityDeviceFlag" class="white-text">Security Device Flag:</label>
-        <select name="itemSecurityDeviceFlag" required>
-            <option value="Activated">Activated</option>
-            <option value="Deactivated">Deactivated</option>
-        </select>
+        <div class="input-group">
+            <label for="itemDamage" class="white-text">Damage:</label>
+            <select name="itemDamage" required>
+                <option value="Like New">Like New</option>
+                <option value="Great">Great</option>
+                <option value="Repairable">Repairable</option>
+                <option value="Unrepairable">Unrepairable</option>
+            </select>
+        </div>
 
-        <label for="itemDamage" class="white-text">Damage:</label>
-        <select name="itemDamage" required>
-            <option value="Like New">Like New</option>
-            <option value="Great">Great</option>
-            <option value="Repairable">Repairable</option>
-            <option value="Unrepairable">Unrepairable</option>
-        </select>
+        <label for= "Author1FirstName" class="white-text">Author 1 First Name:</label>
+        <input type="text" name="Author1FirstName" required maxlength="45">
+
+        <label for= "Author1LastName" class="white-text">Author 1 Last Name:</label>  
+        <input type="text" name="Author1LastName" required maxlength="45">
+
+        <label for= "Author2FirstName" class="white-text">Author 2 First Name:</label>
+        <input type="text" name="Author2FirstName" maxlength="45">
+
+        <label for= "Author2LastName" class="white-text">Author 2 Last Name:</label>
+        <input type="text" name="Author2LastName" maxlength="45">
 
         <button type="submit">Add New Item</button>
 
