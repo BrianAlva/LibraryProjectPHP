@@ -98,6 +98,7 @@
             echo '<label for="itemStatus">Status:</label>';
             echo '<select name="itemStatus" required>';
             echo '<option value="Available" ' . ($row["itemStatus"] === "Available" ? 'selected' : '') . '>Available</option>';
+            echo '<option value="Unavailable" ' . ($row["itemStatus"] === "Unavailable" ? 'selected' : '') . '>Unavailable</option>';
             echo '</select><br><br>';
           
             echo '<label for="itemSecurityDeviceFlag">Security Device Flag:</label>';
